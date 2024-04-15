@@ -1,0 +1,23 @@
+\documentclass[a4paper, 11pt]{report}
+
+\input{./preamble.tex}
+
+\setupdocument{Le Recipe Book}{https://github.com/HughTB/recipes}
+
+\begin{document}
+
+\coverpage{Le Recipe `Book'}
+
+% Hide links specifically on the ToC
+{
+  \hypersetup{hidelinks}
+  \tableofcontents
+}
+
+\part{Mains}
+
+\input{mains/lentil-pasta.tex}
+\input{mains/veggie-chilli.tex}
+\input{mains/macaroni-cheese.tex}
+
+\end{document}

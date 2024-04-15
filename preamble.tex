@@ -1,0 +1,164 @@
+% Setup basic page geometry
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  total={180mm, 257mm},
+  left=15mm,
+  top=20mm
+}
+
+% Command to insert cover page
+% Document-Title
+\newcommand{\coverpage}[1]{
+  \begin{titlepage}
+    \pagecolor{myPurple}
+    \color{white}
+
+    \vspace*{\fill}
+
+    \noindent \Huge{\textit{#1}}\\[2mm]
+    \noindent \huge{Hugh Baldwin}\\[1mm]
+    \Large{contact@hughtb.uk}
+
+    \vspace*{\fill}
+  \end{titlepage}
+  \nopagecolor{}
+}
+
+% Setup hyperlink colours
+\usepackage[]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=myPurple,
+  urlcolor=myPurple
+}
+
+% Basic packages
+\usepackage[no-math]{fontspec}
+\usepackage{fontawesome}
+
+% Set headers and footers, as well as PDF metadata
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+
+% Document-Title Github-Repo
+\newcommand{\setupdocument}[2]{
+  % Override the styling on a plain page
+  \fancypagestyle{plain}{
+    \renewcommand{\headrulewidth}{0pt}
+
+    \fancyfoot[L]{Hugh Baldwin \\ \small{\url{#2}}}
+    \fancyfoot[C]{\textbf{\thepage} of \pageref*{LastPage}}
+    \fancyfoot[R]{#1}
+
+    \fancyhead[L]{\leftmark}
+    \fancyhead[R]{}
+  }
+
+  \pagestyle{fancy}
+
+  \renewcommand{\headrulewidth}{0pt}
+
+  \fancyfoot[L]{Hugh Baldwin \\ \small{\url{#2}}}
+  \fancyfoot[C]{\textbf{\thepage} of \pageref*{LastPage}}
+  \fancyfoot[R]{#1}
+
+  \fancyhead[L]{\leftmark}
+  \fancyhead[R]{}
+
+  % Fancyhdr complains without changing the header height
+  \setlength{\headheight}{14.5pt}
+  \addtolength{\topmargin}{-2.5pt}
+
+  \hypersetup{
+    pdftitle={#1},
+    pdfauthor={Hugh Baldwin}
+  }
+}
+
+% Set the format of chapter headers using titlesec
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\Huge\centering}{}{0pt}{}
+
+\newcommand{\difficulty}[1]{
+  \foreach \x in {1,...,5}{\ifnumgreater{\x}{#1}{\faStarO}{\faStar}}
+}
+
+% Command to create a new recipe (chapter)
+% Name Time Diet Difficulty Servings Ingredients Method
+\newcommand{\recipe}[7]{
+  \chapter{#1}
+
+  \vspace{-35pt}
+  
+  \hrule
+
+  \vspace{10pt}
+
+  \begin{center}
+    \begin{tabular}{ p{0.2\linewidth} p{0.2\linewidth} p{0.2\linewidth} p{0.2\linewidth} }
+      \centering{\faClockO\ Time\\#2} &
+      \centering{\faLeaf\ Diet\\#3} &
+      \centering{\faStarHalfEmpty\ Difficulty\\\difficulty{#4}} &
+      \centering{\faChild\ Servings\\#5} \\
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \begin{tabular}{ p{0.25\linewidth} p{0.7\linewidth} }
+      {
+        \textbf{Ingredients}
+    
+        \begin{raggedright}
+          \begin{itemize}[label={},leftmargin=*]
+            #6
+          \end{itemize}
+        \end{raggedright}
+      } & {
+        \textbf{Method}
+    
+        \begin{raggedright}
+          \begin{enumerate}
+            #7
+          \end{enumerate}
+        \end{raggedright}
+      } \\
+    \end{tabular}
+  \end{center}
+}
+
+% Use the xcolor package, and add my custom purple
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{myPurple}{RGB}{134, 53, 227}
+
+% Use the amsmath package so normal text can be used within math blocks
+\usepackage{amsmath}
+
+% Use the mathspec package to set main and math fonts
+\usepackage{mathspec}
+
+\setmainfont[Ligatures=TeX]{IBM Plex Sans}
+\setsansfont[Ligatures=TeX]{IBM Plex Sans}
+\setmonofont[Ligatures=TeX]{IBM Plex Mono}
+\setmathfont(Digits,Latin){IBM Plex Sans}
+
+% Use the tikz package for diagrams
+\usepackage{tikz}
+
+\tikzset{
+  vertex/.style={circle,thick,draw,inner sep=0pt,minimum size=6.5mm}
+}
+
+% Custom enumerations
+\usepackage{enumitem}
+
+% Diagonal fractions
+\usepackage{xfrac}
