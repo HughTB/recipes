@@ -36,7 +36,7 @@
 
 % Basic packages
 \usepackage[no-math]{fontspec}
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 
 % Set headers and footers, as well as PDF metadata
 \usepackage{lastpage}
@@ -56,7 +56,7 @@
     \fancyfoot[C]{\textbf{\thepage} of \pageref*{LastPage}}
     \fancyfoot[R]{#1}
 
-    \fancyhead[L]{\leftmark}
+    \fancyhead[L]{}
     \fancyhead[R]{}
   }
 
@@ -68,7 +68,7 @@
   \fancyfoot[C]{\textbf{\thepage} of \pageref*{LastPage}}
   \fancyfoot[R]{#1}
 
-  \fancyhead[L]{\leftmark}
+  \fancyhead[L]{}
   \fancyhead[R]{}
 
   % Fancyhdr complains without changing the header height
@@ -85,10 +85,10 @@
 \usepackage{titlesec}
 
 \titleformat{\chapter}[display]
-  {\normalfont\bfseries\Huge\centering}{}{0pt}{}
+  {\normalfont\bfseries\Huge\centering}{\vspace{-70pt}}{0pt}{}
 
 \newcommand{\difficulty}[1]{
-  \foreach \x in {1,...,5}{\ifnumgreater{\x}{#1}{\faStarO}{\faStar}}
+  \foreach \x in {1,...,5}{\ifnumgreater{\x}{#1}{\faStar[regular]}{\faStar}}
 }
 
 % Command to create a new recipe (chapter)
@@ -103,10 +103,10 @@
   \vspace{10pt}
 
   \begin{center}
-    \begin{tabular}{ p{0.2\linewidth} p{0.2\linewidth} p{0.2\linewidth} p{0.2\linewidth} }
-      \centering{\faClockO\ Time\\#2} &
+    \begin{tabular}{ p{0.15\linewidth} p{0.15\linewidth} p{0.15\linewidth} p{0.15\linewidth} }
+      \centering{\faClock[regular]\ Time\\#2} &
       \centering{\faLeaf\ Diet\\#3} &
-      \centering{\faStarHalfEmpty\ Difficulty\\\difficulty{#4}} &
+      \centering{\faStarHalf*\ Difficulty\\\difficulty{#4}} &
       \centering{\faChild\ Servings\\#5} \\
     \end{tabular}
   \end{center}
